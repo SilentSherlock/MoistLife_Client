@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_margin_left">16dp</dimen>
+    <dimen name="activity_margin_right">16dp</dimen>
+
+    <!--顶部工具栏-->
+    <dimen name="top_bar_height">40dp</dimen>
+    <dimen name="top_bar_left_margin">12dp</dimen>
+    <dimen name="top_bar_right_margin">12dp</dimen>
+    <dimen name="view_left_padding">13dp</dimen>
+    <dimen name="view_right_padding">13dp</dimen>
+
+    <!--输入框-->
+    <dimen name="input_height">40dp</dimen>
+    <dimen name="input_margin_top">10dp</dimen>
+    <dimen name="input_margin_bottom">10dp</dimen>
+
+    <!--分割线高度-->
+    <dimen name="line_height">1.5dp</dimen>
+    <!--字体大小-->
+    <dimen name="font_biggest">20dp</dimen>
+    <dimen name="font_big">18dp</dimen>
+    <dimen name="font_medium">14dp</dimen>
+    <dimen name="font_small">12dp</dimen>
+
+    <!--图标大小-->
+    <dimen name="icon_biggest">60dp</dimen>
+    <dimen name="icon_big">48dp</dimen>
+    <dimen name="icon_medium">30dp</dimen>
+    <dimen name="icon_small">20dp</dimen>
+</resources>

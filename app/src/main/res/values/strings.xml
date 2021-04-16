@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">MoistLife</string>
+    
+    <!--icon values-->
+    <string name="ic_home">&#xe751;</string>
+    <string name="ic_home_fill">&#xe750;</string>
+    <string name="ic_discover">&#xe67e;</string>
+    <string name="ic_discover_fill">&#xe6ba;</string>
+    <string name="ic_add">&#xe726;</string>
+    <string name="ic_add_fill">&#xe725;</string>
+    <string name="ic_message">&#xe744;</string>
+    <string name="ic_message_fill">&#xe743;</string>
+    <string name="ic_user">&#xe75e;</string>
+    <string name="ic_user_fill">&#xe75d;</string>
+
+    <string name="ic_close">&#xe723;</string>
+
+    <!--固定文字-->
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="account">账号:</string>
+    <string name="hint">手机号/邮箱</string>
+    <string name="password">密码</string>
+    <string name="validate_code">验证码</string>
+    <string name="get_validate_code">获取验证码</string>
+</resources>
