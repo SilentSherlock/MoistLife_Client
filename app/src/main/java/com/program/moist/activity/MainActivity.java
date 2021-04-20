@@ -9,9 +9,10 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.program.moist.R;
+import com.program.moist.base.BaseActivity;
 import com.program.moist.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding activityMainBinding;
     @Override
