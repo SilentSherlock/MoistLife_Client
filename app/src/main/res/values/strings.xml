@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MoistLife</string>
-    
+
     <!--icon values-->
     <string name="ic_home">&#xe751;</string>
     <string name="ic_home_fill">&#xe750;</string>
@@ -14,6 +14,20 @@
     <string name="ic_user_fill">&#xe75d;</string>
 
     <string name="ic_close">&#xe723;</string>
+    <string name="ic_release">&#xe672;</string>
+    <string name="ic_release_fill">&#xe813;</string>
+    <string name="ic_history">&#xe767;</string>
+    <string name="ic_fav">&#xe64c;</string>
+    <string name="ic_sub">&#xe7d3;</string>
+    <string name="ic_sub_fill">&#xe7d4;</string>
+    <string name="ic_writing">&#xe761;</string>
+
+    <string name="ic_post">&#xe759;</string>
+    <string name="ic_follow">&#xe6f1;</string>
+    <string name="ic_interactive">&#xe70a;</string>
+    <string name="ic_comment">&#xe667;</string>
+    <string name="ic_camera_add">&#xe724;</string>
+
 
     <!--固定文字-->
     <string name="login">登录</string>
@@ -23,4 +37,29 @@
     <string name="password">密码</string>
     <string name="validate_code">验证码</string>
     <string name="get_validate_code">获取验证码</string>
+    <string name="home">首页</string>
+    <string name="explore">发现</string>
+    <string name="message">消息</string>
+    <string name="me">我</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="release">我的发布</string>
+    <string name="fav">我的收藏</string>
+    <string name="sub">我的订阅</string>
+    <string name="writing">草稿箱</string>
+    <string name="post">我的帖子</string>
+    <string name="follow">我的关注</string>
+    <string name="interactive">我的互动</string>
+    <string name="comment">我的评论</string>
+    <string name="title_activity_image_method_select">ImageMethodSelectActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
 </resources>

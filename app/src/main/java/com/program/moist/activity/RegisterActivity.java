@@ -12,11 +12,14 @@ import androidx.annotation.Nullable;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.program.moist.R;
+import com.program.moist.base.App;
 import com.program.moist.base.AppConst;
 import com.program.moist.base.BaseActivity;
 import com.program.moist.databinding.ActivityRegisterBinding;
+import com.program.moist.utils.GsonUtil;
 import com.program.moist.utils.Result;
 import com.program.moist.utils.ResultCallback;
+import com.program.moist.utils.SharedUtil;
 import com.program.moist.utils.Status;
 import com.program.moist.utils.ToastUtil;
 
@@ -38,6 +41,13 @@ public class RegisterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         activityRegisterBinding = ActivityRegisterBinding.inflate(LayoutInflater.from(this));
         setContentView(activityRegisterBinding.getRoot());
+
+        initView();
+        eventBind();
+    }
+
+    @Override
+    protected void initView() {
         validateTimer = new CountDownTimer(60 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -51,14 +61,13 @@ public class RegisterActivity extends BaseActivity {
                 activityRegisterBinding.getEditValidateCode.setText("重新获取");
             }
         };
-        eventBind();
     }
-
 
     /**
      * 绑定页面中的需要处理的事件
      */
-    private void eventBind() {
+    @Override
+    protected void eventBind() {
         RegisterClickListener clickListener = new RegisterClickListener();
 
         activityRegisterBinding.registerToLogin.setOnClickListener(clickListener);
@@ -81,6 +90,7 @@ public class RegisterActivity extends BaseActivity {
                 case R.id.register_to_login:
                     intent.setClass(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    finish();
                     break;
                 case R.id.ic_close:
                     intent.setClass(RegisterActivity.this, MainActivity.class);
@@ -91,7 +101,7 @@ public class RegisterActivity extends BaseActivity {
                     String s = activityRegisterBinding.editAccount.getText().toString();
                     if (!s.equals("")) {
                         if (Pattern.matches(AppConst.Base.number_format, s) || Pattern.matches(AppConst.Base.email_format, s)) {
-                            int type = Pattern.matches(AppConst.Base.number_format, s) ? 1 : 0;
+                            int type = Pattern.matches(AppConst.Base.number_format, s) ? AppConst.Base.type_number : AppConst.Base.type_email;
                             OkGo.<Result>post(AppConst.User.check)
                                     .params("msg", s)
                                     .params("type", type)
@@ -146,13 +156,18 @@ public class RegisterActivity extends BaseActivity {
                                         Result result = response.body();
                                         if (result.getStatus() == Status.SUCCESS) {
                                             ToastUtil.showToastShort("注册成功");
+                                            SharedUtil.setString(App.context, AppConst.Base.login_token, (String) result.getResultMap().get(AppConst.Base.login_token));
+                                            SharedUtil.setString(App.context, AppConst.User.user, GsonUtil.toJson(result.getResultMap().get(AppConst.User.user)));
                                             intent.setClass(RegisterActivity.this, MainActivity.class);
                                             startActivity(intent);
                                             finish();
+                                        } else {
+                                            ToastUtil.showToastShort(result.getDescription());
                                         }
                                     }
                                 });
                     }
+                    break;
             }
         }
     }

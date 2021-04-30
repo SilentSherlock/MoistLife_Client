@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/layout_dialog">
+    <Button
+        android:id="@+id/dialog_change_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="更改头像"
+        android:textSize="@dimen/font_medium" />
+    <Button
+        android:id="@+id/dialog_change_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="更改背景图"
+        android:textSize="@dimen/font_medium" />
+    <Button
+        android:id="@+id/dialog_change_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="修改个人资料"
+        android:textSize="@dimen/font_medium" />
+    <Button
+        android:id="@+id/dialog_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="取消"
+        android:textSize="@dimen/font_medium"
+        android:textColor="@color/watermelon"/>
+
+</LinearLayout>

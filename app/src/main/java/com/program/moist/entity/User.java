@@ -14,6 +14,15 @@ public class User {
     private String identifyNumber;
     private Integer userKind;
     private String userAvatar;
+    private String userBackground;
+
+    public String getUserBackground() {
+        return userBackground;
+    }
+
+    public void setUserBackground(String userBackground) {
+        this.userBackground = userBackground;
+    }
 
     public Integer getUserId() {
         return userId;

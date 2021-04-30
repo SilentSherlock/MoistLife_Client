@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 /**
  * Author: SilentSherlock
  * Date: 2021/4/18
- * Description: sharePreference统一管理，保存用户数据
+ * Description: sharePreference统一管理，保存用户数据简单数据
  */
 public class SharedUtil {
 

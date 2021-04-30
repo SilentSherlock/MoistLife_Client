@@ -119,5 +119,7 @@ public class App extends Application {
         for (Activity activity : activities) {
             activity.finish();
         }
+        SharedUtil.setString(App.context, AppConst.Base.login_token, "");
+        SharedUtil.setString(App.context, AppConst.User.user, "");
     }
 }

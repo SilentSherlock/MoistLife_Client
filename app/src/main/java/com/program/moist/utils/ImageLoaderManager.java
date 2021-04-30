@@ -18,12 +18,12 @@ import java.io.File;
  */
 public class ImageLoaderManager implements ImageLoader {
 
-    public static void loadImage(Context context, String imgUrl, ImageView imageView) {
+    public static void loadImage(Context context, String path, ImageView imageView) {
         Glide.with(context)
-                .load(imgUrl)
-                .placeholder(R.mipmap.ic_launcher)
+                .load(new File(path))
+                .placeholder(R.mipmap.avatar_default)
                 .dontAnimate()
-                .error(R.mipmap.ic_launcher)
+                .error(R.mipmap.avatar_default)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
     }
@@ -37,6 +37,11 @@ public class ImageLoaderManager implements ImageLoader {
                 .error(R.mipmap.ic_launcher)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
+    }
+
+    @Override
+    public void displayImagePreview(Activity activity, String path, ImageView imageView, int width, int height) {
+
     }
 
     @Override

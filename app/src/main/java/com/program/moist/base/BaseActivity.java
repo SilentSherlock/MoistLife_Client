@@ -4,14 +4,18 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 /**
  * Author: SilentSherlock
  * Date: 2021/4/19
  * Description: describe the class
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,4 +29,8 @@ public class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         App.activities.remove(this);
     }
+
+    protected abstract void initView();
+
+    protected abstract void eventBind();
 }

@@ -19,6 +19,10 @@
     <color name="green_2">#65934A</color>
     <color name="green_3">#407434</color>
     <color name="green_4">#03230E</color>
+    <color name="forest">#1e392a</color>
+    <color name="tin">#828081</color>
+    <color name="orange">#f7882f</color>
+    <color name="watermelon">#ff383f</color>
 
     <!--字体颜色-->
 </resources>

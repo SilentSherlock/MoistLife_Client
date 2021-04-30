@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:layout_marginStart="@dimen/top_bar_left_margin"
+        android:layout_marginEnd="@dimen/top_bar_right_margin">
+        <com.program.moist.widget.IconFontTextView
+            android:id="@+id/ic_close"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:text="@string/ic_close"
+            android:textColor="@color/white"/>
+        <com.program.moist.widget.IconFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:id="@+id/login_to_register"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:layout_alignParentEnd="true"
+            />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/current_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/input_margin_top"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gallery"
+            android:layout_weight="1"
+            android:text="相册"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/image_camera"
+            android:layout_weight="1"
+            android:text="相机"/>
+    </LinearLayout>
+</RelativeLayout>

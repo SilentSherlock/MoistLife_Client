@@ -42,6 +42,7 @@
         android:paddingEnd="@dimen/view_right_padding">
         <EditText
             android:hint="@string/hint"
+            android:id="@+id/login_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/view_left_padding"
@@ -55,14 +56,17 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/login_password"
             android:hint="@string/password"
             android:layout_marginStart="@dimen/view_left_padding"
+            android:inputType="textPassword"
             android:layout_marginEnd="@dimen/view_right_padding"
             android:background="@drawable/input_selector"
             android:layout_marginTop="@dimen/input_margin_top"
             android:layout_marginBottom="@dimen/input_margin_bottom"/>
         
         <Button
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login"
