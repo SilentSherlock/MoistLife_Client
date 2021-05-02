@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity {
 
         //初始化viewpager2
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(HomeFragment.newInstance(TAG, TAG));
+        fragments.add(HomeFragment.newInstance());
         fragments.add(DiscoverFragment.newInstance(TAG, TAG));
         fragments.add(AddFragment.newInstance(TAG, TAG));
         fragments.add(MessageFragment.newInstance(TAG, TAG));

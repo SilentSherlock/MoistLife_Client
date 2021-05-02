@@ -13,7 +13,7 @@
     <string name="ic_user">&#xe75e;</string>
     <string name="ic_user_fill">&#xe75d;</string>
 
-    <string name="ic_close">&#xe723;</string>
+    <string name="ic_close">&#xe646;</string>
     <string name="ic_release">&#xe672;</string>
     <string name="ic_release_fill">&#xe813;</string>
     <string name="ic_history">&#xe767;</string>
@@ -27,6 +27,7 @@
     <string name="ic_interactive">&#xe70a;</string>
     <string name="ic_comment">&#xe667;</string>
     <string name="ic_camera_add">&#xe724;</string>
+    <string name="ic_search">&#xe65c;</string>
 
 
     <!--固定文字-->

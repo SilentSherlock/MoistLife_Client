@@ -77,7 +77,7 @@ public class FTPUtil implements Runnable {
                 }
 
                 if (newFileName.equals("")) newFileName = fileName;
-                fileOutputStream = new FileOutputStream(new File(newFilePath + "/" + newFileName));
+                fileOutputStream = new FileOutputStream(new File(newFilePath + newFileName));
                 ftpClient.enterLocalPassiveMode();
                 status = ftpClient.retrieveFile(fileName, fileOutputStream);
             } catch (IOException e) {

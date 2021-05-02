@@ -14,4 +14,29 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <!--Tab样式-->
+    <style name="tab_style" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabBackground">@color/background_white</item>
+        <item name="tabIndicatorColor">@color/green_2</item>
+        <item name="tabIndicatorHeight">@dimen/line_height</item>
+        <item name="tabSelectedTextColor">@color/green_2</item>
+        <item name="android:textSize">@dimen/font_medium</item>
+    </style>
+
+    <!--Info card样式-->
+    <!--首页grid item样式-->
+    <style name="grid_item_style">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">38dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!--搜索框样式-->
+    <style name="search_window">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">@dimen/view_left_padding</item>
+        <item name="cornerSize">?attr/cornerRadius</item>
+        <item name="background">@color/background_white</item>
+    </style>
 </resources>

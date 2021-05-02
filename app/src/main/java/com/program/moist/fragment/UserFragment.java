@@ -92,19 +92,15 @@ public class UserFragment extends BaseFragment {
             String avatar = SharedUtil.getString(App.context, AppConst.User.user_avatar, "");
             String background = SharedUtil.getString(App.context, AppConst.User.user_background, "");
             if (avatar.equals("") && user.getUserAvatar() != null && !user.getUserAvatar().equals("")) {
-                FTPUtil.download(user.getUserAvatar(), AppConst.User.user_avatar_path, avatar);
-                Log.i(TAG, "initView: avatar" + avatar);
-                //SharedUtil.setString(App.context, AppConst.User.user_avatar, AppConst.User.user_avatar_path + avatar);
-                File file = new File( AppConst.User.user_avatar_path + "5.png");
-                Log.i(TAG, "initView: " + file.exists() + "\n" + file.getAbsolutePath() + "\n" + file.getPath() + App.context.getFilesDir().getPath());
-                ImageLoaderManager.loadImage(App.context, file.getAbsolutePath(), fragmentUserBinding.userAvatar);
+                FTPUtil.download(user.getUserAvatar(), AppConst.User.user_avatar_path, avatar);//子线程
             }
             if (background.equals("") && user.getUserBackground() != null && !user.getUserBackground().equals("")) {
-                FTPUtil.download(user.getUserBackground(), AppConst.User.user_background_path, background);
-                ImageLoaderManager.loadImage(App.context, AppConst.User.user_background_path + background, fragmentUserBinding.userBackground);
+                FTPUtil.download(user.getUserBackground(), AppConst.User.user_background_path, background);//子线程
             }
-            //ImageLoaderManager.loadImage(App.context, AppConst.User.user_avatar_path + avatar, fragmentUserBinding.userAvatar);
+            ImageLoaderManager.loadImage(App.context, AppConst.User.user_avatar_path + avatar, fragmentUserBinding.userAvatar);
             ImageLoaderManager.loadImage(App.context, AppConst.User.user_background_path + background, fragmentUserBinding.userBackground);
+
+            fragmentUserBinding.userName.setText(user.getUserName());
         }
     }
 
@@ -141,6 +137,7 @@ public class UserFragment extends BaseFragment {
                     startActivity(intent);
                     break;
                 case R.id.dialog_change_profile:
+                    ToastUtil.showToastShort("还没资料改个锤子");
                     break;
             }
         }

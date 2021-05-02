@@ -17,15 +17,17 @@
             android:gravity="center_vertical"
             android:text="@string/ic_close"
             android:textColor="@color/white"/>
-        <com.program.moist.widget.IconFontTextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:id="@+id/login_to_register"
+
+        <Button
+            android:layout_width="@dimen/top_bar_button_width"
+            android:layout_height="@dimen/top_bar_button_height"
+            android:id="@+id/image_save"
             android:text="保存"
+            android:textSize="@dimen/font_medium"
             android:textColor="@color/white"
+            android:background="@drawable/top_bar_button"
             android:layout_alignParentEnd="true"
-            />
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
 
     <ImageView
