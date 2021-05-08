@@ -38,13 +38,13 @@ public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding activityMainBinding;
     private long exitTime;
+    private Integer position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityMainBinding = ActivityMainBinding.inflate(LayoutInflater.from(this));
         setContentView(activityMainBinding.getRoot());
-
         initView();
         eventBind();
     }
@@ -112,7 +112,8 @@ public class MainActivity extends BaseActivity {
                 activityMainBinding.bottomNavigationBar.selectTab(position);
             }
         });
-        activityMainBinding.mainViewPager.setCurrentItem(0);
+        //position = (Integer) getIntent().getExtras().get("position");
+        activityMainBinding.mainViewPager.setCurrentItem(position);
         Log.i(TAG, "initView: viewpager2 initialed");
     }
 

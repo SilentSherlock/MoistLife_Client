@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
 import com.google.gson.Gson;
@@ -43,8 +44,9 @@ import static com.program.moist.base.AppConst.TAG;
  * create an instance of this fragment.
  */
 public class HomeFragment extends BaseFragment {
-
+    
     private FragmentHomeBinding fragmentHomeBinding;
+    private List<Fragment> fragments;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -89,6 +91,7 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                fragmentHomeBinding.homeViewPager.setCurrentItem(tab.getPosition());
                 switch (tab.getPosition()) {
                     case 0:
                         ToastUtil.showToastShort("0");
@@ -110,7 +113,7 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-        List<Fragment> fragments = new ArrayList<>();
+        fragments = new ArrayList<>();
         fragments.add(HomeRecommendFragment.newInstance());
         fragments.add(HomeFollowFragment.newInstance());
         fragmentHomeBinding.homeViewPager.setAdapter(new FragPageAdapter(getChildFragmentManager(), getLifecycle(), fragments));
@@ -118,6 +121,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
+                //fragmentHomeBinding.homeViewPager.setCurrentItem(position);
                 fragmentHomeBinding.homeTab.selectTab(fragmentHomeBinding.homeTab.getTabAt(position));
             }
         });
@@ -163,4 +167,5 @@ public class HomeFragment extends BaseFragment {
                     }
                 });
     }
+
 }

@@ -1,7 +1,5 @@
 package com.program.moist.entity;
 
-import androidx.annotation.NonNull;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
@@ -18,16 +16,12 @@ public class Category {
     private Date createTime;
     private Date updateTime;
 
-    @NotNull
-    @Override
-    public String toString() {
-        return "Category{" +
-                "cateId=" + cateId +
-                ", parentCateId=" + parentCateId +
-                ", cateName='" + cateName + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
+    public String getCateName() {
+        return cateName;
+    }
+
+    public void setCateName(String cateName) {
+        this.cateName = cateName;
     }
 
     public Integer getCateId() {
@@ -44,14 +38,6 @@ public class Category {
 
     public void setParentCateId(Integer parentCateId) {
         this.parentCateId = parentCateId;
-    }
-
-    public String getCateName() {
-        return cateName;
-    }
-
-    public void setCateName(String cateName) {
-        this.cateName = cateName;
     }
 
     public Date getCreateTime() {

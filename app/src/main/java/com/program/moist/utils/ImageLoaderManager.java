@@ -28,6 +28,15 @@ public class ImageLoaderManager implements ImageLoader {
                 .into(imageView);
     }
 
+    public static void loadImageWeb(Context context, String imgURL, ImageView imageView) {
+        Glide.with(context)
+                .load(imgURL)
+                .placeholder(R.mipmap.background_default)
+                .dontAnimate()
+                .error(R.mipmap.background_default)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imageView);
+    }
     @Override
     public void displayImage(Activity activity, String path, ImageView imageView, int width, int height) {
         Glide.with(activity)

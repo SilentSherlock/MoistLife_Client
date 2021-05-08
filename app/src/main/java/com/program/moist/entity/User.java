@@ -15,14 +15,8 @@ public class User {
     private Integer userKind;
     private String userAvatar;
     private String userBackground;
-
-    public String getUserBackground() {
-        return userBackground;
-    }
-
-    public void setUserBackground(String userBackground) {
-        this.userBackground = userBackground;
-    }
+    private String location;
+    private String signature;
 
     public Integer getUserId() {
         return userId;
@@ -86,5 +80,29 @@ public class User {
 
     public void setUserAvatar(String userAvatar) {
         this.userAvatar = userAvatar;
+    }
+
+    public String getUserBackground() {
+        return userBackground;
+    }
+
+    public void setUserBackground(String userBackground) {
+        this.userBackground = userBackground;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 }

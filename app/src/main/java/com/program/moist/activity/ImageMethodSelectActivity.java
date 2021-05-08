@@ -10,6 +10,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.google.gson.reflect.TypeToken;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -20,33 +21,37 @@ import com.program.moist.base.App;
 import com.program.moist.base.AppConst;
 import com.program.moist.base.BaseActivity;
 import com.program.moist.databinding.ActivityImageMethodSelectBinding;
+import com.program.moist.entity.User;
+import com.program.moist.entity.item.StsToken;
+import com.program.moist.utils.GsonUtil;
 import com.program.moist.utils.ImageLoaderManager;
-import com.program.moist.utils.InnerFileUtil;
+import com.program.moist.utils.OssUtil;
 import com.program.moist.utils.Result;
 import com.program.moist.utils.ResultCallback;
-import com.program.moist.utils.SharedUtil;
 import com.program.moist.utils.Status;
 import com.program.moist.utils.ToastUtil;
+import com.program.moist.utils.TokenUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.program.moist.base.AppConst.TAG;
 
 public class ImageMethodSelectActivity extends BaseActivity {
 
     private ActivityImageMethodSelectBinding activityImageMethodSelectBinding;
-    private String imagePath;
+    private String imageURL;
     private Integer imageType;
+    private String exName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityImageMethodSelectBinding = ActivityImageMethodSelectBinding.inflate(LayoutInflater.from(this));
-        imageType= (Integer) getIntent().getExtras().get(AppConst.Base.image_type);
-        imagePath = imageType.equals(AppConst.Base.background) ?
-                AppConst.User.user_background_path + SharedUtil.getString(App.context, AppConst.User.user_background, "") :
-                AppConst.User.user_avatar_path + SharedUtil.getString(App.context, AppConst.User.user_avatar, "");
+        imageType = (Integer) getIntent().getExtras().get(AppConst.Base.image_type);
+        imageURL = imageType.equals(AppConst.Base.background) ?
+                Objects.requireNonNull(App.getUserInfo()).getUserBackground() :
+                Objects.requireNonNull(App.getUserInfo()).getUserAvatar();
         setContentView(activityImageMethodSelectBinding.getRoot());
         initView();
         eventBind();
@@ -54,8 +59,8 @@ public class ImageMethodSelectActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        Log.i(TAG, "initView: imagePath" + imagePath);
-        ImageLoaderManager.loadImage(App.context, imagePath, activityImageMethodSelectBinding.currentImage);
+        Log.i(TAG, "initView: imagePath" + imageURL);
+        ImageLoaderManager.loadImageWeb(App.context, AppConst.Server.oss_address + imageURL, activityImageMethodSelectBinding.currentImage);
     }
 
     @Override
@@ -96,25 +101,12 @@ public class ImageMethodSelectActivity extends BaseActivity {
                             });
                     break;
                 case R.id.ic_close:
-                    startActivity(new Intent(ImageMethodSelectActivity.this, MainActivity.class));
                     finish();
                     break;
                 case R.id.image_save:
-                    String exName = InnerFileUtil.saveFile(imagePath,
-                            imageType.equals(AppConst.Base.avatar) ? AppConst.User.user_avatar_path : AppConst.User.user_background_path,
-                            String.valueOf(App.getUserInfo().getUserId()));
-                    if (exName != null && !exName.equals("")) {
-                        SharedUtil.setString(App.context,
-                                imageType.equals(AppConst.Base.avatar) ? AppConst.User.user_avatar : AppConst.User.user_background,
-                                App.getUserInfo().getUserId() + exName);
-                        uploadPhoto(imageType.equals(AppConst.Base.avatar) ?
-                                AppConst.User.user_avatar_path + SharedUtil.getString(App.context, AppConst.User.user_avatar, "") :
-                                AppConst.User.user_background_path + SharedUtil.getString(App.context, AppConst.User.user_background, ""));
-                    } else {
-                        ToastUtil.showToastShort("保存失败");
-                        Log.i(TAG, "onClick: imageSave failed");
-                    }
-
+                    uploadPhoto(TokenUtil.getUUID(), exName);
+                    finish();
+                    break;
             }
         }
     }
@@ -128,7 +120,8 @@ public class ImageMethodSelectActivity extends BaseActivity {
                 if (imageItems != null && imageItems.size() > 0) {
                     ImageLoaderManager.loadImage(App.context, imageItems.get(0).path, activityImageMethodSelectBinding.currentImage);
                     ToastUtil.showToastShort("获得照片" + imageItems.size() + "张");
-                    imagePath = imageItems.get(0).path;
+                    imageURL = imageItems.get(0).path;
+                    exName = imageURL.substring(imageURL.lastIndexOf("."));
                 } else {
                     ToastUtil.showToastShort("未获得照片");
                 }
@@ -138,17 +131,80 @@ public class ImageMethodSelectActivity extends BaseActivity {
         }
     }
 
-    private void uploadPhoto(String imagePath) {
-        OkGo.<Result>post(AppConst.User.addImage)
-                .params("image", new File(imagePath))
-                .params("userId", App.getUserInfo().getUserId())
-                .params("type", imageType)
+    /**
+     * 上传图片
+     * @param newName 图片新的名字,使用UUID生成唯一性id
+     * @param exName 扩展名
+     */
+    private void uploadPhoto(String newName, String exName) {
+        OkGo.<Result>post(AppConst.User.getStsToken)
                 .execute(new ResultCallback() {
                     @Override
                     public void onSuccess(Response<Result> response) {
                         Result result = response.body();
                         if (result.getStatus() == Status.SUCCESS) {
-                            ToastUtil.showToastShort("保存成功");
+                            StsToken stsToken = GsonUtil.fromJson(
+                                    GsonUtil.toJson(result.getResultMap().get(AppConst.Base.sts_token)),
+                                    new TypeToken<StsToken>(){}.getType()
+                            );
+                            Log.i(TAG, "onSuccess: stsToken" + stsToken.toString());
+                            OssUtil.getInstance().uploadImage(
+                                    App.context,
+                                    stsToken.getAccessKeyId(),
+                                    stsToken.getAccessKeySecret(),
+                                    stsToken.getSecurityToken(),
+                                    new OssUtil.OssUpCallback() {
+                                        @Override
+                                        public void onSuccess(String imgName, String imgUrl) {
+                                            ToastUtil.showToastShort("保存成功");
+                                            //删除旧的图片
+                                            OssUtil.getInstance().deleteImage(
+                                                    App.context,
+                                                    stsToken.getAccessKeyId(),
+                                                    stsToken.getAccessKeySecret(),
+                                                    stsToken.getSecurityToken(),
+                                                    AppConst.Base.avatar.equals(imageType) ?
+                                                            Objects.requireNonNull(App.getUserInfo()).getUserAvatar() :
+                                                            Objects.requireNonNull(App.getUserInfo()).getUserBackground()
+                                            );
+                                            updateUser(imgName);
+                                        }
+
+                                        @Override
+                                        public void onFail(String message) {
+                                            ToastUtil.showToastShort(message);
+                                        }
+
+                                        @Override
+                                        public void onProgress(long progress, long totalSize) {
+
+                                        }
+                                    },
+                                    newName + exName,
+                                    imageURL
+                            );
+                        }
+                    }
+                });
+    }
+
+    private void updateUser(String imageName) {
+        OkGo.<Result>post(AppConst.User.updateUser)
+                .params("column", AppConst.Base.avatar.equals(imageType) ? "user_avatar" : "user_background")
+                .params("value", imageName)
+                .params("userId", App.getUserInfo().getUserId())
+                .execute(new ResultCallback() {
+                    @Override
+                    public void onSuccess(Response<Result> response) {
+                        Result result = response.body();
+                        if (result.getStatus() == Status.SUCCESS) {
+                            User user = App.getUserInfo();
+                            if (AppConst.Base.avatar.equals(imageType)) {
+                                user.setUserAvatar(imageName);
+                            } else {
+                                user.setUserBackground(imageName);
+                            }
+                            App.setUserInfo(user);
                         }
                     }
                 });

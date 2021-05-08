@@ -14,6 +14,7 @@ public class AppConst {
 
     public interface Server {
         String server_address = "http://192.168.31.38:8080" + divide;
+        String oss_address = "https://moist-life.oss-cn-shanghai.aliyuncs.com" + divide;
         String FTP_IP = "139.196.243.30";
         int FTP_PORT = 21;
         String FTP_USER = "sherlock";
@@ -24,7 +25,10 @@ public class AppConst {
 
     public interface Base {
         String login_token = "login_token";
+        String sts_token = "sts_token";
         String category = "category";
+        String default_info = "default_info";
+        String infos = "INFOS";
         Integer category_num = 15;
 
         String number_format = "0?(13|14|15|18)[0-9]{9}";
@@ -55,6 +59,7 @@ public class AppConst {
         String getAllCate = pref + "getAllCate";
         String getInfoByCate = pref + "getInfoByCate";
         String getInfoByArea = pref + "getInfoByArea";
+        String getInfoByUserId = pref + "getInfoByUserId";
 
         String getInfoByPage = pref_l + "getInfoByPage";
         String addInfo = pref_l + "addInfo";
@@ -69,6 +74,7 @@ public class AppConst {
 
     public interface User {
         String user = "user";
+        String users = "users";
         String user_avatar = "user_avatar";
         String user_background = "user_background";
         String pref = Server.server_address + user + divide + before + divide;
@@ -81,6 +87,7 @@ public class AppConst {
         String register = pref + "register";
         String getUserById = pref + "getUserById";
         String accountValidate = pref + "accountValidateCode";
+        String getUserByPage = pref + "getUserByPage";
 
         String addFollow = pref_l + "addFollow";
         String deleteFollow = pref_l + "deleteFollow";
@@ -88,5 +95,7 @@ public class AppConst {
         String getFollowing = pref_l + "getFollowing";
         String addImage = pref_l + "addImage";
         String getUserInfo = pref_l + "getUserInfo";
+        String getStsToken = pref_l + "getStsToken";
+        String updateUser = pref_l + "updateUser";
     }
 }

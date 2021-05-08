@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_small"
+        android:orientation="horizontal">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_marginStart="@dimen/nav_bar_padding_top"
+            android:id="@+id/item_user_avatar"
+            android:layout_width="@dimen/avatar_length"
+            android:layout_height="@dimen/avatar_length"
+            app:shapeAppearanceOverlay="@style/roundImageShape"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@mipmap/avatar_2"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/input_margin_top">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_user_name"
+                android:text="打个大西瓜"
+                android:textAppearance="?attr/textAppearanceHeadline6"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_user_location"
+                android:text="夹皮沟大学"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="?android:attr/textColorSecondary"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="@dimen/top_bar_button_width"
+            android:layout_height="@dimen/top_bar_button_height"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/item_button"
+            android:background="@drawable/button_2"
+            android:layout_margin="@dimen/view_left_padding"
+            android:text="+关注" />
+    </LinearLayout>
+    <View
+        style="@style/line_style"/>
+</LinearLayout>

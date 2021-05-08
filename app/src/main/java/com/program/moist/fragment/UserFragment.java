@@ -29,6 +29,7 @@ import com.program.moist.utils.ToastUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Objects;
 
 import static com.program.moist.base.AppConst.TAG;
 
@@ -76,30 +77,29 @@ public class UserFragment extends BaseFragment {
         return fragmentUserBinding.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
+    }
+
     /**
      * 向ftp请求数据为子线程，主线程继续操作
      * 导致图片更新不及时
      * 需要设置定时器
+     *
+     * 请求图片已改为OSS对象存储，避免子线程问题
      */
     @Override
     protected void initView() {
-        bottomSheetDialog = new BottomSheetDialog(getContext());
+        bottomSheetDialog = new BottomSheetDialog(requireContext());
         User user = App.getUserInfo();
         if (user == null) {
             ToastUtil.showToastShort("用户尚未登录");
             startActivity(new Intent(getContext(), LoginActivity.class));
         } else {
-            String avatar = SharedUtil.getString(App.context, AppConst.User.user_avatar, "");
-            String background = SharedUtil.getString(App.context, AppConst.User.user_background, "");
-            if (avatar.equals("") && user.getUserAvatar() != null && !user.getUserAvatar().equals("")) {
-                FTPUtil.download(user.getUserAvatar(), AppConst.User.user_avatar_path, avatar);//子线程
-            }
-            if (background.equals("") && user.getUserBackground() != null && !user.getUserBackground().equals("")) {
-                FTPUtil.download(user.getUserBackground(), AppConst.User.user_background_path, background);//子线程
-            }
-            ImageLoaderManager.loadImage(App.context, AppConst.User.user_avatar_path + avatar, fragmentUserBinding.userAvatar);
-            ImageLoaderManager.loadImage(App.context, AppConst.User.user_background_path + background, fragmentUserBinding.userBackground);
-
+            ImageLoaderManager.loadImageWeb(App.context, AppConst.Server.oss_address + user.getUserAvatar(), fragmentUserBinding.userAvatar);
+            ImageLoaderManager.loadImageWeb(App.context, AppConst.Server.oss_address + user.getUserBackground(), fragmentUserBinding.userBackground);
             fragmentUserBinding.userName.setText(user.getUserName());
         }
     }

@@ -18,7 +18,7 @@ import static com.program.moist.base.AppConst.TAG;
 /**
  * Author: SilentSherlock
  * Date: 2021/4/27
- * Description: describe the class
+ * Description: 在项目中实际用作头像上传等，有线程更新等问题，计划改成阿里云对象存储
  */
 public class FTPUtil implements Runnable {
 

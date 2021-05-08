@@ -118,8 +118,10 @@ public class LoginActivity extends BaseActivity{
                     public void onSuccess(Response<Result> response) {
                         Result result = response.body();
                         if (result.getStatus() == Status.SUCCESS) {
+                            Log.i(TAG, "onSuccess: login_token " + (String) result.getResultMap().get(AppConst.Base.login_token));
                             SharedUtil.setString(App.context, AppConst.Base.login_token, (String) result.getResultMap().get(AppConst.Base.login_token));
                             SharedUtil.setString(App.context, AppConst.User.user, GsonUtil.toJson(result.getResultMap().get(AppConst.User.user)));
+                            App.setLoginToken(SharedUtil.getString(App.context, AppConst.Base.login_token, ""));
                         }
                         status = result.getStatus();
                     }
