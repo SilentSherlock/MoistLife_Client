@@ -16,6 +16,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.program.moist.R;
 import com.program.moist.activity.ImageMethodSelectActivity;
 import com.program.moist.activity.LoginActivity;
+import com.program.moist.activity.ProfileActivity;
+import com.program.moist.activity.UserActivity;
 import com.program.moist.base.App;
 import com.program.moist.base.AppConst;
 import com.program.moist.base.BaseFragment;
@@ -69,8 +71,8 @@ public class UserFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        fragmentUserBinding = FragmentUserBinding.inflate(inflater);
-        dialogCameraBinding = DialogCameraBinding.inflate(inflater);
+        fragmentUserBinding = FragmentUserBinding.inflate(inflater, container, false);
+        dialogCameraBinding = DialogCameraBinding.inflate(inflater, container, false);
 
         initView();
         eventBind();
@@ -102,6 +104,7 @@ public class UserFragment extends BaseFragment {
             ImageLoaderManager.loadImageWeb(App.context, AppConst.Server.oss_address + user.getUserBackground(), fragmentUserBinding.userBackground);
             fragmentUserBinding.userName.setText(user.getUserName());
         }
+
     }
 
     @Override
@@ -111,6 +114,10 @@ public class UserFragment extends BaseFragment {
         for (int i = 0;i < dialogCameraBinding.layoutDialog.getChildCount();i++) {
             dialogCameraBinding.layoutDialog.getChildAt(i).setOnClickListener(clickListener);
         }
+        fragmentUserBinding.userInfo.setOnClickListener(clickListener);
+        fragmentUserBinding.userFav.setOnClickListener(clickListener);
+        fragmentUserBinding.userPost.setOnClickListener(clickListener);
+        fragmentUserBinding.userFollow.setOnClickListener(clickListener);
     }
 
     class ClickListener implements View.OnClickListener {
@@ -130,24 +137,49 @@ public class UserFragment extends BaseFragment {
                     intent.setClass(getContext(), ImageMethodSelectActivity.class);
                     intent.putExtra(AppConst.Base.image_type, AppConst.Base.avatar);
                     startActivity(intent);
+                    dismissDialog();
                     break;
                 case R.id.dialog_change_background:
                     intent.setClass(getContext(), ImageMethodSelectActivity.class);
                     intent.putExtra(AppConst.Base.image_type, AppConst.Base.background);
                     startActivity(intent);
+                    dismissDialog();
                     break;
                 case R.id.dialog_change_profile:
-                    ToastUtil.showToastShort("还没资料改个锤子");
+                    startActivity(new Intent(getContext(), ProfileActivity.class));
+                    dismissDialog();
+                    break;
+                case R.id.user_info:
+                    toUser(AppConst.Base.kind_info);
+                    break;
+                case R.id.user_fav:
+                    toUser(AppConst.Base.kind_fav);
+                    break;
+                case R.id.user_post:
+                    toUser(AppConst.Base.kind_post);
+                    break;
+                case R.id.user_follow:
+                    toUser(AppConst.Base.kind_follow);
                     break;
             }
         }
     }
 
+    private void toUser(Integer kindType) {
+        Intent intent1 = new Intent(getContext(), UserActivity.class);
+        intent1.putExtra(AppConst.Base.kind, kindType);
+        startActivity(intent1);
+    }
     /**
      * 显示底部对话框，提供头像背景图更换
      */
     private void showDialog() {
         bottomSheetDialog.setContentView(dialogCameraBinding.getRoot());
         bottomSheetDialog.show();
+    }
+
+    private void dismissDialog() {
+        bottomSheetDialog.dismiss();
+        ((ViewGroup) dialogCameraBinding.getRoot().getParent()).removeView(dialogCameraBinding.getRoot());
     }
 }

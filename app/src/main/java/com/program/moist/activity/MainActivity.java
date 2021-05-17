@@ -24,11 +24,9 @@ import com.program.moist.fragment.DiscoverFragment;
 import com.program.moist.fragment.HomeFragment;
 import com.program.moist.fragment.MessageFragment;
 import com.program.moist.fragment.UserFragment;
-import com.program.moist.utils.FTPUtil;
 import com.program.moist.utils.SharedUtil;
 import com.program.moist.utils.ToastUtil;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,9 +98,9 @@ public class MainActivity extends BaseActivity {
         //初始化viewpager2
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(HomeFragment.newInstance());
-        fragments.add(DiscoverFragment.newInstance(TAG, TAG));
-        fragments.add(AddFragment.newInstance(TAG, TAG));
-        fragments.add(MessageFragment.newInstance(TAG, TAG));
+        fragments.add(DiscoverFragment.newInstance());
+        fragments.add(AddFragment.newInstance());
+        fragments.add(MessageFragment.newInstance());
         fragments.add(UserFragment.newInstance());
         activityMainBinding.mainViewPager.setAdapter(new FragPageAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
         activityMainBinding.mainViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

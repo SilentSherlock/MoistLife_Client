@@ -3,63 +3,75 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-
-    <com.google.android.material.card.MaterialCardView
+    android:orientation="vertical"
+    android:id="@+id/item_info_layout">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="fuck"
+        android:id="@+id/item_info_hide_id"/>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/card_small">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="@dimen/nav_bar_padding_top">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceSubtitle1"
-                android:text="InfoTitle"
-                android:id="@+id/info_title"
-                android:layout_weight="1"/>
-            <RelativeLayout
+            android:layout_height="@dimen/card_small">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="info time"
-                    android:id="@+id/info_time"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/nav_bar_padding_top">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:id="@+id/info_location"
-                    android:text="info location"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:text="InfoTitle"
+                    android:id="@+id/info_title"
+                    android:layout_weight="1"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/info_price"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="@color/watermelon"
-                    android:text="price"/>
-            </RelativeLayout>
-        </LinearLayout>
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="info time"
+                        android:id="@+id/info_time"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"/>
 
-    </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/info_location"
+                        android:text="info location"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-    <View
-        style="@style/line_style"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/info_price"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/watermelon"
+                        android:text="price"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+    <!--<View
+        style="@style/line_style"/>-->
 </LinearLayout>

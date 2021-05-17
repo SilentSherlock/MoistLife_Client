@@ -1,5 +1,7 @@
 package com.program.moist.entity;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,6 +21,22 @@ public class Information implements Serializable {
     private Integer userId;
     private Date infoTime;
     private Date updateTime;
+
+    @Override
+    public String toString() {
+        return "Information{" +
+                "infoId=" + infoId +
+                ", infoTitle='" + infoTitle + '\'' +
+                ", price=" + price +
+                ", cateId=" + cateId +
+                ", area='" + area + '\'' +
+                ", detail='" + detail + '\'' +
+                ", infoPictures='" + infoPictures + '\'' +
+                ", userId=" + userId +
+                ", infoTime=" + infoTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 
     public Integer getInfoId() {
         return infoId;

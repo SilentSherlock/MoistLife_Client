@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -17,7 +16,6 @@ import com.program.moist.base.App;
 import com.program.moist.base.AppConst;
 import com.program.moist.base.BaseActivity;
 import com.program.moist.databinding.ActivityLoginBinding;
-import com.program.moist.entity.User;
 import com.program.moist.utils.GsonUtil;
 import com.program.moist.utils.Result;
 import com.program.moist.utils.ResultCallback;
@@ -37,7 +35,6 @@ import static com.program.moist.base.AppConst.TAG;
 public class LoginActivity extends BaseActivity{
 
     private ActivityLoginBinding activityLoginBinding;
-    private Status status = Status.DEFAULT;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +68,7 @@ public class LoginActivity extends BaseActivity{
                     finish();
                     break;
                 case R.id.ic_close:
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    //startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                     break;
                 case R.id.login:
@@ -86,22 +83,7 @@ public class LoginActivity extends BaseActivity{
                         ToastUtil.showToastShort("账户格式不正确哦~");
                     } else {
                         Integer type = Pattern.matches(AppConst.Base.email_format, account) ? AppConst.Base.type_email : AppConst.Base.type_number;
-                        login(account, password, type);//login为子线程，导致status更新不及时，计划使用定时器
-                        switch (status) {
-                            case SUCCESS:
-                                ToastUtil.showToastShort("登录成功");
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                finish();
-                                break;
-                            case FALSE:
-                                ToastUtil.showToastShort("账户或密码错误哦~");
-                                break;
-                            case NOT_FOUND:
-                                ToastUtil.showToastShort("账户不存在呢，请先注册");
-                                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                                finish();
-                                break;
-                        }
+                        login(account, password, type);
                     }
                     break;
             }
@@ -118,12 +100,21 @@ public class LoginActivity extends BaseActivity{
                     public void onSuccess(Response<Result> response) {
                         Result result = response.body();
                         if (result.getStatus() == Status.SUCCESS) {
-                            Log.i(TAG, "onSuccess: login_token " + (String) result.getResultMap().get(AppConst.Base.login_token));
+                            Log.i(TAG, "onSuccess: login_token " + result.getResultMap().get(AppConst.Base.login_token));
                             SharedUtil.setString(App.context, AppConst.Base.login_token, (String) result.getResultMap().get(AppConst.Base.login_token));
                             SharedUtil.setString(App.context, AppConst.User.user, GsonUtil.toJson(result.getResultMap().get(AppConst.User.user)));
                             App.setLoginToken(SharedUtil.getString(App.context, AppConst.Base.login_token, ""));
+
+                            ToastUtil.showToastShort("登录成功");
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            finish();
+                        } else if (result.getStatus() == Status.FALSE) {
+                            ToastUtil.showToastShort("账户或密码错误哦~");
+                        } else if (result.getStatus() == Status.NOT_FOUND) {
+                            ToastUtil.showToastShort("账户不存在呢，请先注册");
+                            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                            finish();
                         }
-                        status = result.getStatus();
                     }
 
                     @Override

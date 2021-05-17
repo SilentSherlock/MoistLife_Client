@@ -28,6 +28,8 @@
     <string name="ic_comment">&#xe667;</string>
     <string name="ic_camera_add">&#xe724;</string>
     <string name="ic_search">&#xe65c;</string>
+    <string name="ic_thumb_up">&#xe644;</string>
+    <string name="ic_thumb_up_fill">&#xe7f2;</string>
 
 
     <!--固定文字-->
@@ -53,14 +55,11 @@
     <string name="interactive">我的互动</string>
     <string name="comment">我的评论</string>
     <string name="title_activity_image_method_select">ImageMethodSelectActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="button_follow">+关注</string>
+    <string name="button_followed">已关注</string>
+    <string name="tool_bar_fav">收藏</string>
+    <string name="tool_bar_faved">已收藏</string>
+    <string name="search_hint">点击搜索感兴趣的话题</string>
 
 
 </resources>

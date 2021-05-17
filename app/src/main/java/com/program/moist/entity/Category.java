@@ -2,6 +2,7 @@ package com.program.moist.entity;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  * Date: 2021/5/1
  * Description: describe the class
  */
-public class Category {
+public class Category implements Serializable {
     private Integer cateId;
     private Integer parentCateId;//父类别的id，父类别id为0，说明是一级类别
     private String cateName;

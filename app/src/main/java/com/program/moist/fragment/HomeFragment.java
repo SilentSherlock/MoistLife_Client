@@ -1,5 +1,6 @@
 package com.program.moist.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,8 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.program.moist.R;
+import com.program.moist.activity.CategoryActivity;
+import com.program.moist.activity.SearchActivity;
 import com.program.moist.adapters.FragPageAdapter;
 import com.program.moist.base.AppConst;
 import com.program.moist.base.BaseFragment;
@@ -59,8 +62,7 @@ public class HomeFragment extends BaseFragment {
      */
     // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
+        return new HomeFragment();
     }
 
     @Override
@@ -79,6 +81,12 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
     protected void initView() {
 
         //初始化category
@@ -92,14 +100,6 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 fragmentHomeBinding.homeViewPager.setCurrentItem(tab.getPosition());
-                switch (tab.getPosition()) {
-                    case 0:
-                        ToastUtil.showToastShort("0");
-                        break;
-                    case 1:
-                        ToastUtil.showToastShort("1");
-                        break;
-                }
             }
 
             @Override
@@ -128,7 +128,9 @@ public class HomeFragment extends BaseFragment {
     }
     @Override
     protected void eventBind() {
-
+        fragmentHomeBinding.homeToSearch.setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), SearchActivity.class));
+        });
     }
 
     /**
@@ -159,6 +161,11 @@ public class HomeFragment extends BaseFragment {
                                                 Category.class
                                         ).getCateName());*/
                                             ((TextView)(item.getChildAt(1))).setText(categories.get(index).getCateName());
+                                            item.setOnClickListener(v -> {
+                                                Intent intent = new Intent(getContext(), CategoryActivity.class);
+                                                intent.putExtra("category", categories.get(index));
+                                                startActivity(intent);
+                                            });
                                         }
                                     }
                                 }

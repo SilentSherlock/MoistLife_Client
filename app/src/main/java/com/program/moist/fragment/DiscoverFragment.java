@@ -3,64 +3,102 @@ package com.program.moist.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabLayout;
 import com.program.moist.R;
+import com.program.moist.adapters.FragPageAdapter;
+import com.program.moist.base.App;
+import com.program.moist.base.AppConst;
+import com.program.moist.base.BaseFragment;
+import com.program.moist.databinding.FragmentDiscoverBinding;
+import com.program.moist.utils.ImageLoaderManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DiscoverFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DiscoverFragment extends Fragment {
+public class DiscoverFragment extends BaseFragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private FragmentDiscoverBinding fragmentDiscoverBinding;
+    private List<Fragment> fragments;
     public DiscoverFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DiscoverFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DiscoverFragment newInstance(String param1, String param2) {
-        DiscoverFragment fragment = new DiscoverFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+
+    public static DiscoverFragment newInstance() {
+        return new DiscoverFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_discover, container, false);
+        fragmentDiscoverBinding = FragmentDiscoverBinding.inflate(inflater);
+        initView();
+        eventBind();
+        return fragmentDiscoverBinding.getRoot();
+    }
+
+    @Override
+    protected void initView() {
+        if (App.getUserInfo() != null) {
+            ImageLoaderManager.loadImageWeb(App.context, AppConst.Server.oss_address + App.getUserInfo().getUserAvatar(), fragmentDiscoverBinding.discoverUserAvatar);
+        }
+
+        //初始化Tab和viewpager2
+
+        fragmentDiscoverBinding.discoverTab.addTab(fragmentDiscoverBinding.discoverTab.newTab().setText(AppConst.Base.recommend));
+        fragmentDiscoverBinding.discoverTab.addTab(fragmentDiscoverBinding.discoverTab.newTab().setText(AppConst.Base.follow));
+        fragmentDiscoverBinding.discoverTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                fragmentDiscoverBinding.discoverViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        fragments = new ArrayList<>();
+        fragments.add(DiscoverRecommendFragment.newInstance());
+        fragments.add(DiscoverFollowFragment.newInstance());
+        fragmentDiscoverBinding.discoverViewPager.setAdapter(new FragPageAdapter(getChildFragmentManager(), getLifecycle(), fragments));
+        fragmentDiscoverBinding.discoverViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                //fragmentHomeBinding.homeViewPager.setCurrentItem(position);
+                fragmentDiscoverBinding.discoverTab.selectTab(fragmentDiscoverBinding.discoverTab.getTabAt(position));
+            }
+        });
+    }
+
+    @Override
+    protected void eventBind() {
+
     }
 }

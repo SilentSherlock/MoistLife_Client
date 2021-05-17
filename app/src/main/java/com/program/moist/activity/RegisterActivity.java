@@ -93,8 +93,9 @@ public class RegisterActivity extends BaseActivity {
                     finish();
                     break;
                 case R.id.ic_close:
-                    intent.setClass(RegisterActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    /*intent.setClass(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);*/
+                    finish();
                     break;
                 case R.id.get_edit_validate_code:
                     //先校验account是否存在, 再发送验证码

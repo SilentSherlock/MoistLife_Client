@@ -1,11 +1,13 @@
 package com.program.moist.entity;
 
+import java.io.Serializable;
+
 /**
  * Author: SilentSherlock
  * Date: 2021/4/18
  * Description: describe the class
  */
-public class User {
+public class User implements Serializable {
     private Integer userId;
     private String userName;
     private String phoneNumber;
@@ -104,5 +106,9 @@ public class User {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    public User(String userName) {
+        this.userName = userName;
     }
 }

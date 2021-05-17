@@ -11,7 +11,7 @@
     <item
         android:id="@+id/info_detail_favor"
         android:icon="@drawable/ic_favor"
-        android:title="收藏"
+        android:title="@string/tool_bar_fav"
         android:contentDescription="收藏不迷路"
         app:showAsAction="ifRoom" />
 

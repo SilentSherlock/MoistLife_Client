@@ -26,5 +26,6 @@
     <color name="white_3">#FFEBCD</color>
     <color name="white_2">#FAEBD7</color>
     <color name="white_smoke">#e7eee7</color>
+    <color name="message_bubble">#1296db</color>
     <!--字体颜色-->
 </resources>

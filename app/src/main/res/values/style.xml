@@ -36,6 +36,12 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <!--image gird style-->
+    <style name="image_item_style">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">100dp</item>
+    </style>
     <!--搜索框样式-->
     <style name="search_window">
         <item name="android:layout_width">match_parent</item>

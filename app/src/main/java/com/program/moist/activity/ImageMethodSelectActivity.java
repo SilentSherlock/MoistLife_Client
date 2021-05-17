@@ -189,7 +189,7 @@ public class ImageMethodSelectActivity extends BaseActivity {
     }
 
     private void updateUser(String imageName) {
-        OkGo.<Result>post(AppConst.User.updateUser)
+        OkGo.<Result>post(AppConst.User.updateUserColumn)
                 .params("column", AppConst.Base.avatar.equals(imageType) ? "user_avatar" : "user_background")
                 .params("value", imageName)
                 .params("userId", App.getUserInfo().getUserId())

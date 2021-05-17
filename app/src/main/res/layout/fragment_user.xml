@@ -3,302 +3,297 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.UserFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/background_image_height">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:id="@+id/user_background"
-                android:layout_height="@dimen/background_image_height"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/background_default"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_width="@dimen/avatar_length"
-                android:layout_height="@dimen/avatar_length"
-                android:layout_centerInParent="true">
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/background_image_height">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/user_avatar"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/user_background"
+                    android:layout_height="@dimen/background_image_height"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/background_default"/>
+
+                <RelativeLayout
                     android:layout_width="@dimen/avatar_length"
                     android:layout_height="@dimen/avatar_length"
-                    app:strokeWidth="@dimen/avatar_stroke"
-                    app:strokeColor="@color/white"
-                    app:shapeAppearanceOverlay="@style/roundImageShape"
-                    android:padding="@dimen/avatar_padding"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/avatar_default"/>
+                    android:layout_centerInParent="true">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/user_avatar_badge"
-                    android:layout_width="@dimen/avatar_badge"
-                    android:layout_height="@dimen/avatar_badge"
-                    android:background="@drawable/avatar_badge"
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/user_avatar"
+                        android:layout_width="@dimen/avatar_length"
+                        android:layout_height="@dimen/avatar_length"
+                        app:strokeWidth="@dimen/avatar_stroke"
+                        app:strokeColor="@color/white"
+                        app:shapeAppearanceOverlay="@style/roundImageShape"
+                        android:padding="@dimen/avatar_padding"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/avatar_default"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/user_avatar_badge"
+                        android:layout_width="@dimen/avatar_badge"
+                        android:layout_height="@dimen/avatar_badge"
+                        android:background="@drawable/avatar_badge"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_camera_add"
+                        android:scaleType="centerInside"
+                        android:layout_marginEnd="1.5dp"
+                        android:layout_marginBottom="1dp"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_camera_add"
-                    android:scaleType="centerInside"
-                    android:layout_marginEnd="1.5dp"
-                    android:layout_marginBottom="1dp"/>
-
+                    android:id="@+id/user_name"
+                    android:text="@string/me"
+                    android:textAppearance="?attr/textAppearanceHeadline4"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/view_left_padding"/>
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true"
-                android:id="@+id/user_name"
-                android:text="@string/me"
-                android:textSize="@dimen/font_large"
-                android:textColor="@color/white"
-                android:layout_marginStart="@dimen/view_left_padding"/>
-        </RelativeLayout>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/input_margin_top"
-            android:layout_weight="1"
-            android:background="@color/background_white"
-            app:cardElevation="@dimen/activity_margin_right"
-            app:strokeColor="@color/line_color"
-            app:strokeWidth="@dimen/line_height">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/green_3"
-                    android:padding="10dp"
-                    android:text="生活"
-                    android:textAppearance="?attr/textAppearanceSubtitle1" />
+                    android:layout_margin="@dimen/input_margin_top"
 
-                <LinearLayout
+                    android:background="@color/background_white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white_2"
+                            android:padding="10dp"
+                            android:text="生活"
+                            android:textAppearance="?attr/textAppearanceSubtitle1" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:id="@+id/user_info">
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_big"
+                                    android:layout_height="@dimen/icon_big"
+                                    android:src="@drawable/ic_home_2"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/release"
+                                    android:textSize="@dimen/font_small" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:id="@+id/user_fav">
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_big"
+                                    android:layout_height="@dimen/icon_big"
+                                    android:src="@drawable/ic_half_heart"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/fav"
+                                    android:textSize="@dimen/font_small" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_big"
+                                    android:layout_height="@dimen/icon_big"
+                                    android:src="@drawable/ic_substract"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/sub"
+                                    android:textSize="@dimen/font_small" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_big"
+                                    android:layout_height="@dimen/icon_big"
+                                    android:src="@drawable/ic_penandruller"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/writing"
+                                    android:textSize="@dimen/font_small" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+                <View
+                    style="@style/divide_style"/>
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
+                    android:layout_margin="@dimen/input_margin_top"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:orientation="horizontal">
+                    android:background="@color/background_white">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
                         android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="@dimen/font_large"
-                            android:layout_height="@dimen/font_large"
-                            android:src="@drawable/ic_home"/>
-                        <!--<com.program.moist.widget.IconFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ic_release"
-                            android:textSize="@dimen/font_large" />-->
-
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/release"
-                            android:textSize="@dimen/font_small" />
+                            android:background="@color/white_2"
+                            android:padding="10dp"
+                            android:text="兴趣"
+                            android:textAppearance="?attr/textAppearanceSubtitle1" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:id="@+id/user_post">
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_big"
+                                    android:layout_height="@dimen/icon_big"
+                                    android:src="@drawable/ic_book_open"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/post"
+                                    android:textSize="@dimen/font_small" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:id="@+id/user_follow">
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_big"
+                                    android:layout_height="@dimen/icon_big"
+                                    android:src="@drawable/ic_add_user"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/follow"
+                                    android:textSize="@dimen/font_small" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_big"
+                                    android:layout_height="@dimen/icon_big"
+                                    android:src="@drawable/ic_chat4"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/interactive"
+                                    android:textSize="@dimen/font_small" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="@dimen/icon_big"
+                                    android:layout_height="@dimen/icon_big"
+                                    android:src="@drawable/ic_send"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/comment"
+                                    android:textSize="@dimen/font_small" />
+                            </LinearLayout>
+
+                        </LinearLayout>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <com.program.moist.widget.IconFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ic_fav"
-                            android:textSize="@dimen/font_large"
-                            android:textColor="@color/green_3"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/fav"
-                            android:textSize="@dimen/font_small" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <com.program.moist.widget.IconFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ic_sub_fill"
-                            android:textSize="@dimen/font_large" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/sub"
-                            android:textSize="@dimen/font_small" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <com.program.moist.widget.IconFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ic_writing"
-                            android:textSize="@dimen/font_large"
-                            android:textColor="@color/black"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/writing"
-                            android:textSize="@dimen/font_small" />
-                    </LinearLayout>
-
-                </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/input_margin_top"
-            android:layout_weight="1"
-            android:background="@color/background_white"
-            app:cardElevation="@dimen/activity_margin_right"
-            app:strokeColor="@color/line_color"
-            app:strokeWidth="@dimen/line_height">
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/green_3"
-                    android:padding="10dp"
-                    android:text="兴趣"
-                    android:textAppearance="?attr/textAppearanceSubtitle1" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <com.program.moist.widget.IconFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ic_post"
-                            android:textSize="@dimen/font_large" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/post"
-                            android:textSize="@dimen/font_small" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <com.program.moist.widget.IconFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ic_follow"
-                            android:textSize="@dimen/font_large" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/follow"
-                            android:textSize="@dimen/font_small" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <com.program.moist.widget.IconFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ic_interactive"
-                            android:textSize="@dimen/font_large" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/interactive"
-                            android:textSize="@dimen/font_small" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <com.program.moist.widget.IconFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ic_comment"
-                            android:textSize="@dimen/font_large" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/comment"
-                            android:textSize="@dimen/font_small" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-    </LinearLayout>
 
 </LinearLayout>

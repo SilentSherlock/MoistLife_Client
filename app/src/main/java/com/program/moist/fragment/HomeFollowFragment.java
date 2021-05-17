@@ -1,6 +1,7 @@
 package com.program.moist.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,16 +9,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.listener.OnLoadMoreListener;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.program.moist.R;
+import com.program.moist.activity.InfoDetailActivity;
 import com.program.moist.adapters.InfoRecycleAdapter;
 import com.program.moist.adapters.UserRecycleAdapter;
 import com.program.moist.base.App;
@@ -31,6 +38,7 @@ import com.program.moist.utils.GsonUtil;
 import com.program.moist.utils.Result;
 import com.program.moist.utils.ResultCallback;
 import com.program.moist.utils.Status;
+import com.program.moist.utils.ToastUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.HashMap;
@@ -91,6 +99,9 @@ public class HomeFollowFragment extends BaseFragment {
         infoRecycleAdapter.getLoadMoreModule().setEnableLoadMoreEndClick(true);
         infoRecycleAdapter.getLoadMoreModule().checkDisableLoadMoreIfNotFullPage();
 
+        infoRecycleAdapter.setAnimationEnable(true);
+        infoRecycleAdapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom);
+
         userRecycleAdapter = new UserRecycleAdapter(R.layout.item_user_card);
         userRecycleAdapter.getLoadMoreModule().setEnableLoadMoreEndClick(true);
         userRecycleAdapter.getLoadMoreModule().checkDisableLoadMoreIfNotFullPage();
@@ -127,20 +138,42 @@ public class HomeFollowFragment extends BaseFragment {
     @Override
     protected void eventBind() {
         fragmentHomeFollowBinding.followRefresh.setEnableLoadMore(true);
-        fragmentHomeFollowBinding.followRefresh.setOnLoadMoreListener(new com.scwang.smartrefresh.layout.listener.OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                generateInfoUser(null);
-                if (itemInfoUser != null && itemInfoUser.size() != 0) {
-                    infoRecycleAdapter.addData(itemInfoUser);
-                    itemInfoUser = null;
-                    fragmentHomeFollowBinding.followRefresh.finishLoadMore();
-                } else {
-                    fragmentHomeFollowBinding.followRefresh.finishLoadMoreWithNoMoreData();
-                }
+        fragmentHomeFollowBinding.followRefresh.setOnLoadMoreListener(refreshLayout -> {
+            generateInfoUser(null);
+            if (itemInfoUser != null && itemInfoUser.size() != 0) {
+                infoRecycleAdapter.addData(itemInfoUser);
+                itemInfoUser = null;
+                fragmentHomeFollowBinding.followRefresh.finishLoadMore();
+            } else {
+                fragmentHomeFollowBinding.followRefresh.finishLoadMoreWithNoMoreData();
             }
         });
-        //用户刷新待修改，计划不用上拉刷新
+        infoRecycleAdapter.setOnItemClickListener((adapter, view, position) -> {
+            TextView hide = (TextView)((LinearLayout) view).getChildAt(0);
+            int infoId = Integer.parseInt((String) hide.getText());
+            OkGo.<Result>post(AppConst.Info.getInfoById)
+                    .params("infoId", infoId)
+                    .execute(new ResultCallback() {
+                        @Override
+                        public void onSuccess(Response<Result> response) {
+                            Result result = response.body();
+                            if (result.getStatus() == Status.SUCCESS) {
+                                Information information = GsonUtil.fromJson(
+                                        GsonUtil.toJson(result.getResultMap().get("INFO")),
+                                        new TypeToken<Information>(){}.getType()
+                                );
+                                Log.i(TAG, "onSuccess: info" + information.toString());
+                                Intent intent = new Intent(getActivity(), InfoDetailActivity.class);
+                                intent.putExtra("information", information);
+                                startActivity(intent);
+                            } else {
+                                Log.i(TAG, "onSuccess: " + result.getStatus());
+                            }
+                        }
+                    });
+        });
+        //fragmentHomeFollowBinding.followRefresh;
+        //用户刷新待修改，计划不用上拉刷新，改为点击刷新
         userRecycleAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
@@ -260,4 +293,5 @@ public class HomeFollowFragment extends BaseFragment {
             Log.i(TAG, "generateInfoUser: itemInfoUser长度" + itemInfoUser.size());
         }
     }
+
 }

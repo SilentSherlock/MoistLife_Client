@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/edit_tool_bar"
+            style="@style/Widget.MaterialComponents.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back_light"
+            app:title="发布" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="6dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/edit_info_need">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="区域"
+                    app:counterEnabled="true"
+                    android:id="@+id/edit_area_layout"
+                    app:counterMaxLength="5"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_medium"
+                        android:id="@+id/edit_area"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="期望价格"
+                    app:errorEnabled="true"
+                    android:id="@+id/edit_price_layout">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edit_price"
+                        android:digits="0123456789."
+                        android:textSize="@dimen/font_medium" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <View style="@style/divide_style" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="6dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="标题"
+                    android:id="@+id/edit_title_layout"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edit_title"
+                        android:textSize="@dimen/font_medium" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="详情"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="300"
+                    app:errorEnabled="true"
+                    android:id="@+id/edit_detail_layout">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_medium"
+                        android:id="@+id/edit_detail"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <View
+                style="@style/divide_style"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/edit_image_root">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_margin="3dp"
+                        style="@style/image_item_style"
+                        android:src="@drawable/ic_image_add"
+                        android:gravity="center"
+                        android:scaleType="centerInside">
+                    </ImageView>
+                    <ImageView
+                        android:layout_margin="3dp"
+                        style="@style/image_item_style"
+                        android:src="@drawable/ic_image_add"
+                        android:gravity="center"
+                        android:scaleType="centerInside">
+                    </ImageView>
+                    <ImageView
+                        android:layout_margin="3dp"
+                        style="@style/image_item_style"
+                        android:src="@drawable/ic_image_add"
+                        android:gravity="center"
+                        android:scaleType="centerInside">
+                    </ImageView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_margin="3dp"
+                        style="@style/image_item_style"
+                        android:src="@drawable/ic_image_add"
+                        android:gravity="center"
+                        android:scaleType="centerInside">
+                    </ImageView>
+                    <ImageView
+                        android:layout_margin="3dp"
+                        style="@style/image_item_style"
+                        android:src="@drawable/ic_image_add"
+                        android:gravity="center"
+                        android:scaleType="centerInside">
+                    </ImageView>
+                    <ImageView
+                        android:layout_margin="3dp"
+                        style="@style/image_item_style"
+                        android:src="@drawable/ic_image_add"
+                        android:gravity="center"
+                        android:scaleType="centerInside">
+                    </ImageView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_margin="3dp"
+                        style="@style/image_item_style"
+                        android:src="@drawable/ic_image_add"
+                        android:gravity="center"
+                        android:scaleType="centerInside">
+                    </ImageView>
+                    <ImageView
+                        android:layout_margin="3dp"
+                        style="@style/image_item_style"
+                        android:src="@drawable/ic_image_add"
+                        android:gravity="center"
+                        android:scaleType="centerInside">
+                    </ImageView>
+                    <ImageView
+                        android:layout_margin="3dp"
+                        style="@style/image_item_style"
+                        android:src="@drawable/ic_image_add"
+                        android:gravity="center"
+                        android:scaleType="centerInside">
+                    </ImageView>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/button_2"
+        android:id="@+id/edit_release"
+        android:text="发布"/>
+</LinearLayout>

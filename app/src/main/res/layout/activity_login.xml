@@ -40,30 +40,36 @@
         android:orientation="vertical"
         android:paddingStart="@dimen/view_left_padding"
         android:paddingEnd="@dimen/view_right_padding">
-        <EditText
-            android:hint="@string/hint"
-            android:id="@+id/login_account"
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/view_left_padding"
-            android:layout_marginEnd="@dimen/view_right_padding"
-            android:background="@drawable/input_selector"
-            android:layout_marginTop="@dimen/input_margin_top"
-            android:layout_marginBottom="@dimen/input_margin_bottom"
-            />
+            android:hint="手机号/邮箱"
+            app:endIconMode="clear_text"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_medium"
+                android:id="@+id/login_account"/>
+        </com.google.android.material.textfield.TextInputLayout>
         <!--<View
             style="@style/line_style"/>-->
-        <EditText
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/login_password"
-            android:hint="@string/password"
-            android:layout_marginStart="@dimen/view_left_padding"
-            android:inputType="textPassword"
-            android:layout_marginEnd="@dimen/view_right_padding"
-            android:background="@drawable/input_selector"
-            android:layout_marginTop="@dimen/input_margin_top"
-            android:layout_marginBottom="@dimen/input_margin_bottom"/>
+            android:hint="密码"
+            app:endIconMode="password_toggle"
+            android:id="@+id/login_password_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_medium"
+                android:id="@+id/login_password"/>
+        </com.google.android.material.textfield.TextInputLayout>
         
         <Button
             android:id="@+id/login"
@@ -75,7 +81,7 @@
             android:layout_marginEnd="@dimen/view_right_padding"
             android:layout_marginTop="@dimen/input_margin_top"
             android:layout_marginBottom="@dimen/input_margin_bottom"
-            android:background="@color/green_2"/>
+            android:background="@color/orange"/>
 
         <TextView
             android:layout_width="wrap_content"

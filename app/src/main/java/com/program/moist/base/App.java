@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
@@ -13,15 +14,23 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 import com.program.moist.entity.User;
+import com.program.moist.entity.item.Message;
+import com.program.moist.socket.NIOClient;
+import com.program.moist.socket.NIOServer;
 import com.program.moist.utils.GsonUtil;
 import com.program.moist.utils.ImageLoaderManager;
+import com.program.moist.utils.InnerFileUtil;
+import com.program.moist.utils.MessageCallback;
 import com.program.moist.utils.SharedUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 
 import okhttp3.OkHttpClient;
+
+import static com.program.moist.base.AppConst.TAG;
 
 /**
  * Author: SilentSherlock
@@ -37,7 +46,8 @@ public class App extends Application {
     public static Context context;
     @SuppressLint("StaticFieldLeak")
     public static App app;
-
+    public static LinkedBlockingQueue<Message> messageQueue;//用来存放正在聊天的消息
+    public static LinkedBlockingQueue<Message> receiveQueue;//存放接收到的消息，由MessageFragment中线程消费，用来通知新消息到来
 
     @Override
     public void onCreate() {
@@ -48,6 +58,7 @@ public class App extends Application {
 
         initOkGo();
         initImagePicker();
+        initIM();
     }
 
     /**
@@ -91,7 +102,37 @@ public class App extends Application {
         imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
     }
 
+    /**
+     * 初始化SOCKET服务端进行通信
+     * 获取到消息后，检测取消息的线程是否存在，也就是接收者是否打开了聊天窗口
+     * 存在则放到消息队列中，并持久化到本地
+     * 不存在则直接持久化
+     * 如果存放消息文件第一次创建，则通知MessageFragment中更新UI线程，新增对话框
+     */
+    public void initIM() {
+        messageQueue = new LinkedBlockingQueue<>();
+        receiveQueue = new LinkedBlockingQueue<>();
+        NIOServer.start(null, null, message -> {
+            Log.i(TAG, "onSuccess: host " + message.getSender() + " msg " + message.getContent());
+            for (Thread thread : Thread.getAllStackTraces().keySet()) {
+                if (thread.getName().equals(message.getSender())) {
+                    try {
+                        messageQueue.put(message);
+                    } catch (InterruptedException e) {
+                        Log.e(TAG, "onSuccess: messageQueue", e);
+                    }
 
+                }
+            }
+            boolean first = InnerFileUtil.saveObjectToFile(message, AppConst.Base.chat_dir, message.getSender() + ".txt");
+            try {
+                receiveQueue.put(message);
+            } catch (InterruptedException e) {
+                Log.e(TAG, "initIM: receiveQueue", e);
+            }
+
+        });
+    }
     public static String getLoginToken() {
         return SharedUtil.getString(context, AppConst.Base.login_token, "");
     }
@@ -115,11 +156,16 @@ public class App extends Application {
         return GsonUtil.fromJson(userInfo, User.class);
     }
 
+    public static boolean isLogin() {
+        return getUserInfo() != null;
+    }
     public static void exit() {
         for (Activity activity : activities) {
             activity.finish();
         }
+
         SharedUtil.setString(App.context, AppConst.Base.login_token, "");
         SharedUtil.setString(App.context, AppConst.User.user, "");
     }
+
 }
